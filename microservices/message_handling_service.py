@@ -32,10 +32,16 @@ def send_introduction(id: str = 'default'):
     requests.post('%s/outgoing/%s' % (io_service_url, id), json={'message': message})
     
 
+# TODO before sending a new message, check if a response is given. If not, send in an empty message.
+
 
 def send_reminder_after_wakeup():
     global start_time
     global current_state
+    
+    if not current_state == WaterDrinkingReminderConversationState.ANSWERED_FINISH_DRINKING:
+        handle_no_response()
+    
     print('Morning! Time to drink some water! Reply yes after you finish!')
     # reminder_time = mock_database_handler.load_data('wakeup_reminder_time')
     # reminder_time += 24 * 3600 // 100
@@ -47,6 +53,10 @@ def send_reminder_after_wakeup():
 def send_reminder_before_sleep():
     global start_time
     global current_state
+    
+    if not current_state == WaterDrinkingReminderConversationState.ANSWERED_FINISH_DRINKING:
+        handle_no_response()
+        
     print('Time to have some water before you sleep! Reply yes after you finish!')
     # reminder_time = mock_database_handler.load_data('sleep_reminder_time')
     # reminder_time += 24 * 3600 // 100
@@ -57,7 +67,6 @@ def send_reminder_before_sleep():
 
 def handle_response(response: str):
     global current_state
-    print('current_state: %s' % current_state)
     if current_state == WaterDrinkingReminderConversationState.SLEEP:
         return
     if current_state is None:
@@ -206,15 +215,20 @@ def handle_response_finish_drinking(response: str):
             if not num_missed:
                 num_missed = 0
             mock_database_handler.save_data('num_missed', num_missed + 1)
-        current_state = WaterDrinkingReminderConversationState.SLEEP
-    else:
-        # TODO keep track of how many times there have been no responses for later use.
-        pass
+        current_state = WaterDrinkingReminderConversationState.ANSWERED_FINISH_DRINKING
+
+
+def handle_no_response(id: str = 'default'):
+    num_no_response = mock_database_handler.load_data('num_no_response')
+    if not num_no_response:
+        num_no_response = 0
+    mock_database_handler.save_data('num_no_response', num_no_response + 1)
+    print('num_no_response:', num_no_response + 1)
+
 
 @app.route('/incoming/<id>', methods=['POST'])
 def handle_incoming(id: str):
     incoming_message = request.json['message']
-    print('Received input message for user %s: %s' % (id, incoming_message))
     handle_response(incoming_message)
     return jsonify()
 
@@ -225,6 +239,6 @@ def print_date_time():
 
 if __name__ == '__main__':
     send_introduction()
-    scheduler.add_job(func=print_date_time, trigger="interval", seconds=3)
+    scheduler.add_job(func=print_date_time, trigger="interval", seconds=20)
     scheduler.start()
     app.run(debug=True, port=5001)

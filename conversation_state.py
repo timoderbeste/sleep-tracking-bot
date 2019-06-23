@@ -8,3 +8,4 @@ class WaterDrinkingReminderConversationState(Enum):
     ASK_BED_TIME = 4,
     SLEEP = 5,
     ASK_FINISH_DRINKING = 6,
+    ANSWERED_FINISH_DRINKING = 7,
