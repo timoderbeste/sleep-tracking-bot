@@ -1,0 +1,21 @@
+{
+  "questions": [
+    {
+      "body": "Hi, it's good to meet you. My name is Walter Bot. I am your hydration assistant who will ensure that you drink enough water everyday. What is your name?",
+      "type": "text"
+    },
+    {
+      "body": "Can you tell me your height?",
+      "type": "text"
+    },
+    {
+      "body": "Thanks. Now can you tell me your weight?",
+      "type": "numeric"
+    },
+    {
+      "body": "Great. Just one more thing. How many cups of water do you drink now on a daily basis?",
+      "type": "numeric"
+    }
+  ],
+  "title": "Flask"
+}
