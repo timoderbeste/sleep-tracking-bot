@@ -36,7 +36,7 @@ callers = {
 account_sid = 'AC96667ba222e43cae8b9857372b6b6709'
 auth_token = 'cf369e037a592bbcf0497e113bae68eb'
 client = Client(account_sid, auth_token)
-TWILIO_NUM = '+16197623257'
+TWILIO_NUM = '+12565703455'
 OUTPUT_FILE = 'smsbot_log.json'
 state_counter = 0
 
