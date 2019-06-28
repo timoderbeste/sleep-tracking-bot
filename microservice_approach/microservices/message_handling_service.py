@@ -242,3 +242,4 @@ if __name__ == '__main__':
     scheduler.add_job(func=print_date_time, trigger="interval", seconds=20)
     scheduler.start()
     app.run(debug=True, port=5001)
+
