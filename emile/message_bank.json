@@ -1,0 +1,12 @@
+{"init":"Hi it's Emile! I help you get to bed earlier so you can get better, more consistent sleep! Text START to begin! (Data and msg rates apply)",
+ "init_response":"Thanks for giving me a try! 🎉",
+ "ask_ideal_bedtime":"What time would you ideally get to bed on weekdays? (example: 10:00pm)",
+ "as_current_bedtime":"Noted. On average, what time have you been getting to bed these last few weeks? (example: 1:00am)",
+ "ask_time_zone":"Last question! What's your time zone?",
+ "ask_time_zone_response":"Gotcha! I'll send you weekly bedtime goals and keep you accountable to them. Your first week's easy on purpose, to help build momentum for harder goals ahead!",
+ "explain_rule":"Alright here's how things work. Each week you get a weekly bedtime goal, and based on your progress, that goal gets earlier each week until you're at your ideal schedule.",
+ "give_weekly_options":"You've got options for for first week's goal: \n\nA. In bed by <TIME1> <REPETITION1> times\nB. In bed by <TIME2> <REPETITION2> times\n\nReply \"A\" or \"B\" to choose one.",
+ "weekly_options_followup1":"Excellent choice! 👌 I’ll send reminders and check-ins to help you stay on track starting tonight!",
+ "weekly_options_followup2":"Remember, if you get your first week's goal, next week will be harder and so on until you're at your ideal schedule!",
+ "notify_bedtime":"Remember, bedtime tonight is <TIME> ."
+}
