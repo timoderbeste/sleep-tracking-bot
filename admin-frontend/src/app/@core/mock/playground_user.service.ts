@@ -1,6 +1,6 @@
 import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -21,6 +21,20 @@ export class PlaygroundUserService extends PlaygroundUserData {
       .catch(this.handleErrorObservable);
   }
 
+  createUser(data: Object): Observable<PlaygroundUser> {
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    let options = {headers: headers};
+    return this.http.post('http://localhost:4200/api/users', data, options)
+            .map(this.extractPlaygroundUser)
+            .catch(this.handleErrorObservable);
+  }
+
+  deleteUser(id: number): Observable<PlaygroundUser> {
+    return this.http.delete('http://localhost:4200/api/users/' + id)
+    .map(this.extractPlaygroundUser)
+    .catch(this.handleErrorObservable);
+  }
+
   private extractPlaygroundUsers(res: any) {
     console.log(res);
     return res.users.map(item => {
@@ -32,6 +46,17 @@ export class PlaygroundUserService extends PlaygroundUserData {
         item.email,
       );
     });
+  }
+
+  private extractPlaygroundUser(res: any): PlaygroundUser {
+    let item = res.user;
+    return new PlaygroundUser(
+      item.id,
+      item.name,
+      item.phone_number,
+      item.country_code,
+      item.email,
+    );
   }
 
   private handleErrorObservable(error: Response | any) {
