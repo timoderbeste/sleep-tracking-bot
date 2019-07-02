@@ -15,20 +15,20 @@ export class PlaygroundComponent implements OnInit {
   smartTableSettings = {
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
       },
       name: {
-        title: 'Full Name'
+        title: 'Full Name',
       },
       phoneNumber: {
-        title: 'Phone Number'
+        title: 'Phone Number',
       },
       countryCode: {
-        title: 'Country Code'
+        title: 'Country Code',
       },
       email: {
-        title: 'Email'
-      }
+        title: 'Email',
+      },
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -59,14 +59,14 @@ export class PlaygroundComponent implements OnInit {
     this.playgroundUserService.getUsers()
     .subscribe((users: [PlaygroundUser]) => {
       console.log('users:', users);
-      let jsonifiedUsers = users.map(item => {
+      const jsonifiedUsers = users.map(item => {
         return {
           'id': item.id,
           'name': item.name,
           'phoneNumber': item.phone_number,
           'countryCode': item.country_code,
           'email': item.email,
-        }
+        };
       });
       this.userSource = new LocalDataSource(jsonifiedUsers);
     });
