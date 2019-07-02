@@ -22,17 +22,25 @@ export class PlaygroundUserService extends PlaygroundUserData {
   }
 
   createUser(data: Object): Observable<PlaygroundUser> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    let options = {headers: headers};
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
     return this.http.post('http://localhost:4200/api/users', data, options)
-            .map(this.extractPlaygroundUser)
-            .catch(this.handleErrorObservable);
+                .map(this.extractPlaygroundUser)
+                .catch(this.handleErrorObservable);
   }
 
   deleteUser(id: number): Observable<PlaygroundUser> {
-    return this.http.delete('http://localhost:4200/api/users/' + id)
+    return this.http.delete(`http://localhost:4200/api/users/${id}`)
     .map(this.extractPlaygroundUser)
     .catch(this.handleErrorObservable);
+  }
+
+  updateUser(id: number, data: Object): Observable<PlaygroundUser> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
+    return this.http.put(`http://localhost:4200/api/users/${id}`, data, options)
+                .map(this.extractPlaygroundUser)
+                .catch(this.handleErrorObservable);
   }
 
   private extractPlaygroundUsers(res: any) {
@@ -49,7 +57,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
   }
 
   private extractPlaygroundUser(res: any): PlaygroundUser {
-    let item = res.user;
+    const item = res.user;
     return new PlaygroundUser(
       item.id,
       item.name,

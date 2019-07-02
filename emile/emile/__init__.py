@@ -15,6 +15,10 @@ def prepare_app(environment='development', p_db=db):
     app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
     admin.add_view(ModelView(User, p_db.session))
     # load views by importing them
-    from . import views
+    # from . import views
     return app
 
+def save_and_commit(item):
+    db.session.add(item)
+    db.session.commit()
+db.save = save_and_commit

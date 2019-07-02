@@ -21,5 +21,6 @@ export class PlaygroundUser {
 export abstract class PlaygroundUserData {
   abstract getUsers(): Observable<PlaygroundUser[]>;
   abstract createUser(data: Object): Observable<PlaygroundUser>;
-  abstract deleteUser(id: number): Observable<any>;
+  abstract deleteUser(id: number): Observable<PlaygroundUser>;
+  abstract updateUser(id: number, data: Object): Observable<PlaygroundUser>;
 }

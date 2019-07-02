@@ -100,4 +100,17 @@ export class PlaygroundComponent implements OnInit {
     }
   }
 
+  editUser(event) {
+    console.log('editUser event', event);
+    if (window.confirm('Are you sure you want to update?')) {
+      this.playgroundUserService.updateUser(event.newData.id, event.newData)
+      .subscribe((user: PlaygroundUser) => {
+        console.log('user updated:', user);
+        this.getUsers();
+        event.confirm.resolve();
+      });
+    } else {
+      event.confirm.reject();
+    }
+  }
 }
