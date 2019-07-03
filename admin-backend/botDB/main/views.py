@@ -1,4 +1,4 @@
-from flask import session, redirect, url_for, current_app
+from flask import request, session, redirect, url_for, current_app, jsonify
 from .. import db
 from ..models import Datum, User, Record
 from . import main
@@ -19,29 +19,28 @@ def get_users():
     allUser = User.query.all()
     data = list()
     for u in allUser:
-        udict = u.to_dict
-        udict['id'] = u.id
-        data.append(u.dict)
-        return jsonify({'users': data})
+        data.append(u.to_dict())
+    return jsonify({'users': data})
+
+
+@main.route('/user/<int:user_id>', methods=['GET'])
+def get_user(user_id: int):
+    targetUser = User.query.get_or_404(user_id)
+    return jsonify({'user': targetUser.to_dict()}), 201
+
 
 
 @main.route('/users', methods=['POST'])
 def create_user():
-    if not request.json or not 'name' in request.json:
+    if not request.json:
         abort(400)
-
-    with open('mock_database.json', 'r') as f:
-        data = json.load(f)
-        users = data['users']
 
     newUser = User(userName = request.json['userName'], phone = request.json['phone'], currentPlan=request.json['currentPlan'], 
         personalInfo = request.json['personalInfo'])
 
     db.session.add(newUser)
     db.session.commit()
-    newUserDict = newUser.to_dict
-    newUserDict['id'] = newUser.id
-    return jsonify({'user': newUserDict}), 201
+    return jsonify({'user': newUser.to_dict()}), 201
 
 
 @main.route('/users/<int:user_id>', methods=['PUT'])
@@ -56,22 +55,15 @@ def update_user(user_id: int):
     targetUser.personalInfo = request.json['personalInfo']
     db.session.add(targetUser)
     db.session.commit()
+    return jsonify({'user': targetUser.to_dict()}), 201
  
 
 
 @main.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id: int):
-    with open('mock_database.json', 'r') as f:
-        data = json.load(f)
-        users = data['users']
+    targetUser = User.query.get_or_404(user_id)
+    targetDict = targetUser.to_dict()
+    db.session.delete(targetUser)
+    db.session.commit()
 
-    user = [user for user in users if user['id'] == user_id]
-    if len(user) == 0:
-        abort(404)
-
-    users.remove(user[0])
-    with open('mock_database.json', 'w') as f:
-        data['users'] = users
-        json.dump(data, f)
-
-    return jsonify({'user': user[0]}), 201
+    return jsonify({'user': targetDict}), 201
