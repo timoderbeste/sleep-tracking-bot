@@ -17,18 +17,30 @@ export class PlaygroundComponent implements OnInit {
       id: {
         title: 'ID',
       },
-      name: {
-        title: 'Full Name',
+      userName: {
+        title: 'User Name',
       },
-      phoneNumber: {
-        title: 'Phone Number',
+      phone: {
+        title: 'Phone',
       },
-      countryCode: {
-        title: 'Country Code',
+      currentPlan: {
+        title: 'Current Plan',
       },
-      email: {
-        title: 'Email',
+      personalInformation: {
+        title: 'Personal Information',
       },
+      // name: {
+      //   title: 'Full Name',
+      // },
+      // phoneNumber: {
+      //   title: 'Phone Number',
+      // },
+      // countryCode: {
+      //   title: 'Country Code',
+      // },
+      // email: {
+      //   title: 'Email',
+      // },
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -62,10 +74,14 @@ export class PlaygroundComponent implements OnInit {
       const jsonifiedUsers = users.map(item => {
         return {
           'id': item.id,
-          'name': item.name,
-          'phoneNumber': item.phone_number,
-          'countryCode': item.country_code,
-          'email': item.email,
+          'userName': item.userName,
+          'phone': item.phone,
+          'currentPlan': item.currentPlan,
+          'personalInformation': item.personalInformation,
+          // 'name': item.name,
+          // 'phoneNumber': item.phone_number,
+          // 'countryCode': item.country_code,
+          // 'email': item.email,
         };
       });
       this.userSource = new LocalDataSource(jsonifiedUsers);
