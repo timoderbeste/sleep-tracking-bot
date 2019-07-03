@@ -23,12 +23,15 @@ def get_users():
     return jsonify({'users': data})
 
 
-@main.route('/user/<int:user_id>', methods=['GET'])
-def get_user(user_id: int):
+@main.route('/user/id/<int:user_id>', methods=['GET'])
+def get_user_byID(user_id: int):
     targetUser = User.query.get_or_404(user_id)
     return jsonify({'user': targetUser.to_dict()}), 201
 
-
+@main.route('/user/phone/<user_phone>', methods=['GET'])
+def get_user_byPhone(user_phone):
+    targetUser = User.query.filter_by(phone = user_phone).first_or_404()
+    return jsonify({'user': targetUser.to_dict()}), 201
 
 @main.route('/users', methods=['POST'])
 def create_user():
