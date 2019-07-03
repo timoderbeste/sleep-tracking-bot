@@ -48,10 +48,14 @@ export class PlaygroundUserService extends PlaygroundUserData {
     return res.users.map(item => {
       return new PlaygroundUser(
         item.id,
-        item.name,
-        item.phone_number,
-        item.country_code,
-        item.email,
+        item.userName,
+        item.phone,
+        item.currentPlan,
+        item.personalInformation
+        // item.name,
+        // item.phone_number,
+        // item.country_code,
+        // item.email,
       );
     });
   }
@@ -60,10 +64,14 @@ export class PlaygroundUserService extends PlaygroundUserData {
     const item = res.user;
     return new PlaygroundUser(
       item.id,
-      item.name,
-      item.phone_number,
-      item.country_code,
-      item.email,
+      item.userName,
+      item.phone,
+      item.currentPlan,
+      item.personalInformation
+      // item.name,
+      // item.phone_number,
+      // item.country_code,
+      // item.email,
     );
   }
 
