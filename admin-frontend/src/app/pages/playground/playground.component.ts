@@ -26,7 +26,7 @@ export class PlaygroundComponent implements OnInit {
       currentPlan: {
         title: 'Current Plan',
       },
-      personalInformation: {
+      personalInfo: {
         title: 'Personal Information',
       },
       // name: {
@@ -77,7 +77,7 @@ export class PlaygroundComponent implements OnInit {
           'userName': item.userName,
           'phone': item.phone,
           'currentPlan': item.currentPlan,
-          'personalInformation': item.personalInformation,
+          'personalInfo': item.personalInfo,
           // 'name': item.name,
           // 'phoneNumber': item.phone_number,
           // 'countryCode': item.country_code,
