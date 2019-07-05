@@ -1,6 +1,6 @@
 # Database sever for Magic Butler
 
-database sever for Sleep reminder chatbot, Magic Butler
+database sever for Sleep reminder chat bot, Magic Butler
 
 ## Quickstart
 
@@ -10,37 +10,37 @@ This project is built using the Flask web framework. It runs on Python 3.4+.
 
 To run the sever locally follow these steps:
 
-1. Clone this repository and `cd` into `database_sever` repo.
+1. Clone this repository and `cd` into `database_sever` folder.
 
-1. Create a new virtual environment and activte it :
+1. Create a new virtual environment and activate it :
 
-    ``bash
+    ``
     python3 -m venv venv
     source venv/bin/activate
     ``
 
 1. Install the requirements.
 
-    ``bash
+    ``
     pip install -r requirements.txt
     ``
 
 1. Initial the database.
 
-    ``bash
+    ``
     python3 manage.py db init
     ``
 
 1. Run the migration.
 
-    ``bash
+    ``
     python3 manage.py db migrate -m "initial migration"
     python3 manage.py db upgrade
     ``
 
 1. Start the database server.
 
-    ``bash
+    ``
     python3 manage.py runserver -p [portnum]
     ``
 
