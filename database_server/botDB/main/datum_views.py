@@ -15,13 +15,13 @@ def get_data():
     return jsonify({'data': data})
 
 
-@main.route('/data/id/<int:data_id>', methods=['GET'])
+@main.route('/datum/id/<int:data_id>', methods=['GET'])
 def get_datum(data_id: int):
     targetData = Datum.query.get_or_404(data_id)
     return jsonify({'datum': targetData.to_dict()}), 201
 
 
-@main.route('/data', methods=['POST'])
+@main.route('/datum', methods=['POST'])
 def create_datum():
     if not request.json:
         abort(400)
@@ -34,7 +34,7 @@ def create_datum():
     return jsonify({'datum': newDatum.to_dict()}), 201
 
 
-@main.route('/data/<int:data_id>', methods=['PUT'])
+@main.route('/datum/<int:data_id>', methods=['PUT'])
 def update_datum(data_id: int):
     if not request.json:
         abort(400)
@@ -50,7 +50,7 @@ def update_datum(data_id: int):
  
 
 
-@main.route('/data/<int:data_id>', methods=['DELETE'])
+@main.route('/datum/<int:data_id>', methods=['DELETE'])
 def delete_datum(data_id: int):
     targetDatum = Datum.query.get_or_404(data_id)
     targetDict = targetDatum.to_dict()

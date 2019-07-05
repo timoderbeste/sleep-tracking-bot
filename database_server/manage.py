@@ -24,21 +24,15 @@ def test():
 
     if not test_result.wasSuccessful():
         sys.exit(1)
-# 
 
-@manager.command
-def dbseed():
-    with open('user.json') as user_file:
-        user_json_string = user_file.read()
-        db.save(parsers.user_from_json(user_json_string))
+
+# @manager.command
+# def dbseed():
+#     with open('user.json') as user_file:
+#         user_json_string = user_file.read()
+#         db.save(parsers.user_from_json(user_json_string))
 
 
 if __name__ == "__main__":
     
     manager.run()
-    us1 = User(phone='11111', currentPLan='123456', personalInfo='wang')
-    us2 = User(phone='22222', currentPLan='201512', personalInfo='zhang')
-    us3 = User(phone='33333', currentPLan='987654', personalInfo='chen')
-    us4 = User(phone='44444', currentPLan='456789', personalInfo='zhou')
-    db.session.add_all([us1, us2, us3, us4])
-    db.session.commit()

@@ -33,7 +33,7 @@ def get_user_byPhone(user_phone):
     targetUser = User.query.filter_by(phone = user_phone).first_or_404()
     return jsonify({'user': targetUser.to_dict()}), 201
 
-@main.route('/users', methods=['POST'])
+@main.route('/user', methods=['POST'])
 def create_user():
     if not request.json:
         abort(400)
@@ -46,7 +46,7 @@ def create_user():
     return jsonify({'user': newUser.to_dict()}), 201
 
 
-@main.route('/users/<int:user_id>', methods=['PUT'])
+@main.route('/user/<int:user_id>', methods=['PUT'])
 def update_user(user_id: int):
     if not request.json:
         abort(400)
@@ -62,7 +62,7 @@ def update_user(user_id: int):
  
 
 
-@main.route('/users/<int:user_id>', methods=['DELETE'])
+@main.route('/user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id: int):
     targetUser = User.query.get_or_404(user_id)
     targetDict = targetUser.to_dict()

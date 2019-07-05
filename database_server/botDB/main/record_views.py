@@ -21,7 +21,7 @@ def get_record_byID(record_id: int):
     return jsonify({'record': targetRecord.to_dict()}), 201
 
 
-@main.route('/records', methods=['POST'])
+@main.route('/record', methods=['POST'])
 def create_record():
     if not request.json:
         abort(400)
@@ -34,7 +34,7 @@ def create_record():
     return jsonify({'record': newRecord.to_dict()}), 201
 
 
-@main.route('/records/<int:record_id>', methods=['PUT'])
+@main.route('/record/<int:record_id>', methods=['PUT'])
 def update_record(record_id: int):
     if not request.json:
         abort(400)
@@ -50,7 +50,7 @@ def update_record(record_id: int):
  
 
 
-@main.route('/records/<int:record_id>', methods=['DELETE'])
+@main.route('/record/<int:record_id>', methods=['DELETE'])
 def delete_record(record_id: int):
     targetRecord = Record.query.get_or_404(record_id)
     targetDict = targetRecord.to_dict()
