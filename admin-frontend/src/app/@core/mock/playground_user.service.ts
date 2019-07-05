@@ -51,7 +51,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
         item.userName,
         item.phone,
         item.currentPlan,
-        item.personalInformation
+        item.personalInfo
         // item.name,
         // item.phone_number,
         // item.country_code,
@@ -67,7 +67,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
       item.userName,
       item.phone,
       item.currentPlan,
-      item.personalInformation
+      item.personalInfo
       // item.name,
       // item.phone_number,
       // item.country_code,

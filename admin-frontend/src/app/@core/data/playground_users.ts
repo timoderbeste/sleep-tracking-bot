@@ -5,7 +5,7 @@ export class PlaygroundUser {
   userName: string;
   phone: string;
   currentPlan: string;
-  personalInformation: string;
+  personalInfo: string;
   // name: string;
   // phone_number: string;
   // country_code: string;
@@ -16,7 +16,7 @@ export class PlaygroundUser {
     userName: string,
     phone: string,
     currentPlan: string,
-    personalInformation: string
+    personalInfo: string
     // name: string,
     // phone_number: string,
     // country_code: string,
@@ -26,7 +26,7 @@ export class PlaygroundUser {
     this.userName = userName;
     this.phone = phone;
     this.currentPlan = currentPlan;
-    this.personalInformation = personalInformation;
+    this.personalInfo = personalInfo;
     // this.name = name;
     // this.phone_number = phone_number;
     // this.country_code = country_code;
