@@ -23,6 +23,9 @@ class Datum(db.Model):
     def to_dict(self):
         dicttem = dict(self.__dict__)
         dicttem.pop('_sa_instance_state', None)
+        if self.id != None:
+            dicttem['id'] = self.id
+        dicttem['time'] = str(self.time)
         return dicttem
 
 class User(db.Model):
@@ -70,3 +73,11 @@ class Record(db.Model):
     
     def __repr__(self):
         return '<Record %r>' % self.id
+    
+    def to_dict(self):
+        dicttem = dict(self.__dict__)
+        dicttem.pop('_sa_instance_state', None)
+        if self.id != None:
+            dicttem['id'] = self.id
+        dicttem['date'] = str(self.date)
+        return dicttem
