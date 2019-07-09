@@ -126,7 +126,7 @@ def update_miss_reset(user_id: int):
     return jsonify({'user': targetUser.to_dict()}), 201
 
 @main.route('/user/<int:user_id>/changeplan', methods=['PUT'])
-def update_miss_reset(user_id: int):
+def update_changeplan(user_id: int):
     if not request.json:
         abort(400)
 
