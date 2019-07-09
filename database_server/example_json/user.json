@@ -1,7 +1,13 @@
 {
 	"userName": "zhihan",
 	"phone": "124211",
-	"personalInfo": "****",
-	"currentPlan": "11:30 p.m."
+	"timezone": "",
+	"idealBedtime": "",
+	"currentBedtime":"",
+	"currentState":"",
+	"weeklyHit":"0",
+	"weeklyMiss":"0",
+	"weeklyPlanId":"-1"
+
 
 }

@@ -8,6 +8,6 @@
 **/results
 **/*~
 **/venv
-**/migrations
+**/database_server/migrations
 **/node_modules
 **/dev.sqlite

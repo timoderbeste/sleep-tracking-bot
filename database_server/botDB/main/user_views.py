@@ -33,7 +33,7 @@ def create_user():
         abort(400)
 
     newUser = User(userName = request.json['userName'], phone = request.json['phone'], timezone = request.json['timezone'], 
-    	weeklPlanId = int(request.json['weeklPlanId']), idealBedtime = request.json['idealBedtime'], currentBedtime = request.json['currentBedtime'], 
+    	weeklyPlanId = int(request.json['weeklyPlanId']), idealBedtime = request.json['idealBedtime'], currentBedtime = request.json['currentBedtime'], 
     	currentState = request.json['currentState'], weeklyHit = int(request.json['weeklyHit']), weeklyMiss = int(request.json['weeklyMiss']))
 
     db.session.add(newUser)
@@ -55,7 +55,7 @@ def update_user(user_id: int):
     targetUser.currentState = request.json['currentState']
     targetUser.weeklyHit = int(request.json['weeklyHit'])
     targetUser.weeklyMiss = int(request.json['weeklyMiss'])
-    targetUser.weeklPlanId = int(request.json['weeklPlanId'])
+    targetUser.weeklyPlanId = int(request.json['weeklyPlanId'])
     db.session.add(targetUser)
     db.session.commit()
     return jsonify({'user': targetUser.to_dict()}), 201
@@ -137,7 +137,7 @@ def update_changeplan(user_id: int):
     db.session.commit()
     
     targetUser = Plan.query.get_or_404(user_id)
-    targetUser.weeklPlanId = updatePlan.id
+    targetUser.weeklyPlanId = updatePlan.id
     db.session.add(targetUser)
     db.session.commit()
     return jsonify({'user': targetUser.to_dict()}), 201
