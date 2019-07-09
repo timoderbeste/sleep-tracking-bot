@@ -5,7 +5,7 @@ import { PlaygroundComponent } from './playground.component';
 
 @NgModule({
   imports: [
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
   ],
   declarations: [
     PlaygroundComponent,
