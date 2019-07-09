@@ -59,7 +59,18 @@ def update_user(user_id: int):
     db.session.add(targetUser)
     db.session.commit()
     return jsonify({'user': targetUser.to_dict()}), 201
- 
+
+@main.route('/user/<int:user_id>', methods=['PUT'])
+def update_user_state(user_id: int):
+    if not request.json:
+        abort(400)
+
+    targetUser = User.query.get_or_404(user_id)
+    targetUser.currentState = request.json['currentState']
+    db.session.add(targetUser)
+    db.session.commit()
+    return jsonify({'user': targetUser.to_dict()}), 201
+
 @main.route('/user/<int:user_id>/hit++', methods=['PUT'])
 def update_hit_plus(user_id: int):
 
