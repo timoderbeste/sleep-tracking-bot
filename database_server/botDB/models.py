@@ -10,7 +10,6 @@ class Table(db.Model):
         dicttem.pop('_sa_instance_state', None)
         if self.id != None:
             dicttem['id'] = self.id
-        dicttem['time'] = str(self.time)
         return dicttem
 
 
@@ -33,7 +32,7 @@ class Datum(Table):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     isUser = db.Column(db.Boolean, nullable=False)
     content = db.Column(db.String(256))
-    time = db.Column(db.DateTime)
+    time = db.Column(db.String(32)) # example: '2018-02-03 15:37:12'
     __mapper_args__ = {'concrete': True}
    
     def __repr__(self):
@@ -52,8 +51,8 @@ class User(Table):
     currentBedtime = db.Column(db.String(64))
     currentState = db.Column(db.String(64))
     weeklyPlanId = db.Column(db.Integer, db.ForeignKey('plans.id'))
-    weeklyhit = db.Column(db.Integer)
-    weeklymiss = db.Column(db.Integer)
+    weeklyHit = db.Column(db.Integer)
+    weeklyMiss = db.Column(db.Integer)
     __mapper_args__ = {'concrete': True}
 
     def __repr__(self):
@@ -65,9 +64,9 @@ class Record(Table):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     weeklyPlanId = db.Column(db.Integer, db.ForeignKey('plans.id'))
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.String(16), nullable=False) # example: '2018-02-03'
     isSlept = db.Column(db.Boolean, nullable=False)
-    reason = db.Column(db.String)
+    reason = db.Column(db.String(128))
     __mapper_args__ = {'concrete': True}
     	
     def __repr__(self):

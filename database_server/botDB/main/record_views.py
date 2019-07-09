@@ -1,4 +1,3 @@
-from datetime import datetime
 from flask import request, session, redirect, url_for, current_app, jsonify
 from .. import db
 from ..models import Datum, User, Record
@@ -27,7 +26,7 @@ def create_record():
         abort(400)
 
     newRecord = Record(weeklPlanId = int(request.json['weeklPlanId']), userId = int(request.json['userId']), reason = request.json['reason'],
-     isSlept = bool(request.json['isSlept']), date = datetime.strptime(request.json['date'] , '%Y-%m-%d').date()) # example: '2018-02-03'
+     isSlept = bool(request.json['isSlept']), date = request.json['date']) # example: '2018-02-03'
 
     db.session.add(newRecord)
     db.session.commit()
@@ -44,7 +43,7 @@ def update_record(record_id: int):
     targetRecord.userId = int(request.json['userId'])
     targetRecord.reason = request.json['reason']
     targetRecord.isSlept = bool(request.json['isSlept'])
-    targetRecord.date = datetime.strptime(request.json['date'] , '%Y-%m-%d').date()
+    targetRecord.date = request.json['date']
     db.session.add(targetRecord)
     db.session.commit()
     return jsonify({'record': targetRecord.to_dict()}), 201
