@@ -16,7 +16,7 @@ export class PlaygroundUser {
     userName: string,
     phone: string,
     currentPlan: string,
-    personalInfo: string
+    personalInfo: string,
     // name: string,
     // phone_number: string,
     // country_code: string,

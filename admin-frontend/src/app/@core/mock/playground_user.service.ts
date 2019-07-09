@@ -1,4 +1,4 @@
-import { of as observableOf,  Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
@@ -51,7 +51,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
         item.userName,
         item.phone,
         item.currentPlan,
-        item.personalInfo
+        item.personalInfo,
         // item.name,
         // item.phone_number,
         // item.country_code,
@@ -67,7 +67,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
       item.userName,
       item.phone,
       item.currentPlan,
-      item.personalInfo
+      item.personalInfo,
       // item.name,
       // item.phone_number,
       // item.country_code,

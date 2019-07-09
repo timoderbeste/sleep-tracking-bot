@@ -16,7 +16,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Playground',
     icon: 'nb-play',
     link: '/pages/playground',
-  }
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,
