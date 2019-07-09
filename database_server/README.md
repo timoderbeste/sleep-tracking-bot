@@ -63,6 +63,13 @@ To run the sever locally follow these steps:
 		- http://localhost:port/user/[idnum]: Delete user by ID
 	- Update
 		- http://localhost:port/user/[idnum]: Update user by ID
+		- http://localhost:port/user/[idnum]/hit++
+		- http://localhost:port/user/[idnum]/hit--
+		- http://localhost:port/user/[idnum]/miss++
+		- http://localhost:port/user/[idnum]/miss--
+		- http://localhost:port/user/[idnum]/missreset
+		- http://localhost:port/user/[idnum]/hitreset
+		- http://localhost:port/user/[idnum]/changeplan
 2. For Record column:
 	- Search (request method: GET)
 		- http://localhost:port/records: return all records

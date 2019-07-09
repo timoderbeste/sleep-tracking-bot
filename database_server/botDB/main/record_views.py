@@ -26,8 +26,8 @@ def create_record():
     if not request.json:
         abort(400)
 
-    newRecord = Record(userId = int(request.json['userId']), reason = request.json['reason'], isSlept = bool(request.json['isSlept']), 
-        date = datetime.strptime(request.json['date'] , '%Y-%m-%d').date()) # example: '2018-02-03'
+    newRecord = Record(weeklPlanId = int(request.json['weeklPlanId']), userId = int(request.json['userId']), reason = request.json['reason'],
+     isSlept = bool(request.json['isSlept']), date = datetime.strptime(request.json['date'] , '%Y-%m-%d').date()) # example: '2018-02-03'
 
     db.session.add(newRecord)
     db.session.commit()
@@ -40,6 +40,7 @@ def update_record(record_id: int):
         abort(400)
 
     targetRecord = Record.query.get_or_404(record_id)
+    targetRecord.weeklPlanId = int(request.json['weeklPlanId'])
     targetRecord.userId = int(request.json['userId'])
     targetRecord.reason = request.json['reason']
     targetRecord.isSlept = bool(request.json['isSlept'])
