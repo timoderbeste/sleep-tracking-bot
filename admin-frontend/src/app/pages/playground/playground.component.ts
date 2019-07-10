@@ -17,30 +17,18 @@ export class PlaygroundComponent implements OnInit {
       id: {
         title: 'ID',
       },
-      userName: {
-        title: 'User Name',
+      name: {
+        title: 'Full Name',
       },
-      phone: {
-        title: 'Phone',
+      phoneNumber: {
+        title: 'Phone Number',
       },
-      currentPlan: {
-        title: 'Current Plan',
+      countryCode: {
+        title: 'Country Code',
       },
-      personalInfo: {
-        title: 'Personal Information',
+      email: {
+        title: 'Email',
       },
-      // name: {
-      //   title: 'Full Name',
-      // },
-      // phoneNumber: {
-      //   title: 'Phone Number',
-      // },
-      // countryCode: {
-      //   title: 'Country Code',
-      // },
-      // email: {
-      //   title: 'Email',
-      // },
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -69,34 +57,30 @@ export class PlaygroundComponent implements OnInit {
 
   getUsers() {
     this.playgroundUserService.getUsers()
-    .subscribe((users: [PlaygroundUser]) => {
-      console.log('users:', users);
-      const jsonifiedUsers = users.map(item => {
-        return {
-          'id': item.id,
-          'userName': item.userName,
-          'phone': item.phone,
-          'currentPlan': item.currentPlan,
-          'personalInfo': item.personalInfo,
-          // 'name': item.name,
-          // 'phoneNumber': item.phone_number,
-          // 'countryCode': item.country_code,
-          // 'email': item.email,
-        };
-      });
-      this.userSource = new LocalDataSource(jsonifiedUsers);
-    });
+        .subscribe((users: [PlaygroundUser]) => {
+          console.log('users:', users);
+          const jsonifiedUsers = users.map(item => {
+            return {
+              'id': item.id,
+              'name': item.name,
+              'phoneNumber': item.phone_number,
+              'countryCode': item.country_code,
+              'email': item.email,
+            };
+          });
+          this.userSource = new LocalDataSource(jsonifiedUsers);
+        });
   }
 
   createUser(event) {
     console.log(event);
     if (window.confirm('Are you sure you want to create?')) {
       this.playgroundUserService.createUser(event.newData)
-      .subscribe((user: PlaygroundUser) => {
-        console.log(user);
-        this.getUsers();
-        event.confirm.resolve();
-      });
+          .subscribe((user: PlaygroundUser) => {
+            console.log(user);
+            this.getUsers();
+            event.confirm.resolve();
+          });
     } else {
       event.confirm.reject();
     }
@@ -106,11 +90,11 @@ export class PlaygroundComponent implements OnInit {
     console.log(event);
     if (window.confirm('Are you sure you want to delete?')) {
       this.playgroundUserService.deleteUser(event.data.id)
-      .subscribe((user: PlaygroundUser) => {
-        console.log('user deleted:', user);
-        this.getUsers();
-        event.confirm.resolve();
-      });
+          .subscribe((user: PlaygroundUser) => {
+            console.log('user deleted:', user);
+            this.getUsers();
+            event.confirm.resolve();
+          });
     } else {
       event.confirm.reject();
     }
@@ -120,11 +104,11 @@ export class PlaygroundComponent implements OnInit {
     console.log('editUser event', event);
     if (window.confirm('Are you sure you want to update?')) {
       this.playgroundUserService.updateUser(event.newData.id, event.newData)
-      .subscribe((user: PlaygroundUser) => {
-        console.log('user updated:', user);
-        this.getUsers();
-        event.confirm.resolve();
-      });
+          .subscribe((user: PlaygroundUser) => {
+            console.log('user updated:', user);
+            this.getUsers();
+            event.confirm.resolve();
+          });
     } else {
       event.confirm.reject();
     }
