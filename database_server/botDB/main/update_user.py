@@ -1,4 +1,4 @@
-from flask import request, session, redirect, url_for, current_app, jsonify
+from flask import request, session, redirect, url_for, current_app, jsonify, abort
 from .. import db
 from ..models import Datum, User, Record, Plan
 from . import main
@@ -21,6 +21,10 @@ def update_user_info(user_id: int):
         targetUser.currentBedtime = updateDict['currentBedtime']
     if  'timezone'in updateDict:
         targetUser.timezone = updateDict['timezone']
+    if  'userChoiceA'in updateDict:
+        targetUser.userChoiceA = updateDict['userChoiceA']
+    if  'userChoiceB'in updateDict:
+        targetUser.userChoiceB = updateDict['userChoiceB']
     db.session.add(targetUser)
     db.session.commit()
     return jsonify({'user': targetUser.to_dict()}), 201

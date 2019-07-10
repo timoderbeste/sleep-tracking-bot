@@ -1,4 +1,4 @@
-from flask import request, session, redirect, url_for, current_app, jsonify
+from flask import request, session, redirect, url_for, current_app, jsonify, abort
 from .. import db
 from ..models import Datum, User, Record, Plan
 from . import main
@@ -34,7 +34,8 @@ def create_user():
 
     newUser = User(userName = request.json['userName'], phone = request.json['phone'], timezone = request.json['timezone'], 
     	weeklyPlanId = int(request.json['weeklyPlanId']), idealBedtime = request.json['idealBedtime'], currentBedtime = request.json['currentBedtime'], 
-    	currentState = request.json['currentState'], weeklyHit = int(request.json['weeklyHit']), weeklyMiss = int(request.json['weeklyMiss']))
+    	currentState = request.json['currentState'], weeklyHit = int(request.json['weeklyHit']), weeklyMiss = int(request.json['weeklyMiss']),
+    	userChoiceA = request.json['userChoiceA'], userChoiceB = request.json['userChoiceB'])
 
     db.session.add(newUser)
     db.session.commit()
@@ -58,6 +59,7 @@ def update_user(user_id: int):
     targetUser.weeklyPlanId = int(request.json['weeklyPlanId'])
     db.session.add(targetUser)
     db.session.commit()
+    
     return jsonify({'user': targetUser.to_dict()}), 201
 
 
@@ -69,3 +71,5 @@ def delete_user(user_id: int):
     db.session.commit()
 
     return jsonify({'user': targetDict}), 201
+
+

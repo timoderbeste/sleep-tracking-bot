@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import request, session, redirect, url_for, current_app, jsonify
+from flask import request, session, redirect, url_for, current_app, jsonify, abort
 from .. import db
 from ..models import Datum, User, Record
 from . import main
@@ -27,7 +27,7 @@ def create_datum():
         abort(400)
 
     newDatum = Datum(userId = int(request.json['userId']), isUser = bool(request.json['isUser']), content = request.json['content'], 
-        time = datetime.strptime(request.json['time'] , '%Y-%m-%d %H:%M:%S')) # example: '2018-02-03 15:37:12'
+        time = request.json['time']) 
 
     db.session.add(newDatum)
     db.session.commit()
