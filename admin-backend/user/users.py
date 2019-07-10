@@ -33,7 +33,7 @@ def create_user():
     }
     users.append(user)
 
-    with current_app.open_resource('../static/mock_database.json', 'w') as f:
+    with current_app.open_resource('static/mock_database.json', 'w') as f:
         data['users'] = users
         json.dump(data, f)
 
@@ -45,7 +45,7 @@ def update_user(user_id: int):
     if not request.json:
         abort(400)
 
-    with current_app.open_resource('../static/mock_database.json', 'r') as f:
+    with current_app.open_resource('static/mock_database.json', 'r') as f:
         data = json.load(f)
         users = data['users']
 
@@ -60,7 +60,7 @@ def update_user(user_id: int):
             if request.json['email']:
                 user['email'] = request.json['email']
 
-            with current_app.open_resource('../static/mock_database.json', 'w') as f:
+            with current_app.open_resource('static/mock_database.json', 'w') as f:
                 data['users'] = users
                 json.dump(data, f)
 
@@ -70,7 +70,7 @@ def update_user(user_id: int):
 
 @user.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id: int):
-    with current_app.open_resource('../static/mock_database.json', 'r') as f:
+    with current_app.open_resource('static/mock_database.json', 'r') as f:
         data = json.load(f)
         users = data['users']
 
@@ -79,7 +79,7 @@ def delete_user(user_id: int):
         abort(404)
 
     users.remove(user[0])
-    with current_app.open_resource('../static/mock_database.json', 'w') as f:
+    with current_app.open_resource('static/mock_database.json', 'w') as f:
         data['users'] = users
         json.dump(data, f)
 

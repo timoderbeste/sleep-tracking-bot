@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
@@ -16,46 +16,42 @@ export class PlaygroundUserService extends PlaygroundUserData {
 
   getUsers(): Observable<PlaygroundUser[]> {
     return this.http
-      .get('http://localhost:4200/api/users')
-      .map(this.extractPlaygroundUsers)
-      .catch(this.handleErrorObservable);
+        .get('http://localhost:5000/api/users')
+        .map(this.extractPlaygroundUsers)
+        .catch(this.handleErrorObservable);
   }
 
   createUser(data: Object): Observable<PlaygroundUser> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    return this.http.post('http://localhost:4200/api/users', data, options)
-                .map(this.extractPlaygroundUser)
-                .catch(this.handleErrorObservable);
+    return this.http.post('http://localhost:5000/api/users', data, options)
+        .map(this.extractPlaygroundUser)
+        .catch(this.handleErrorObservable);
   }
 
   deleteUser(id: number): Observable<PlaygroundUser> {
-    return this.http.delete(`http://localhost:4200/api/users/${id}`)
-    .map(this.extractPlaygroundUser)
-    .catch(this.handleErrorObservable);
+    return this.http.delete(`http://localhost:5000/api/users/${id}`)
+        .map(this.extractPlaygroundUser)
+        .catch(this.handleErrorObservable);
   }
 
   updateUser(id: number, data: Object): Observable<PlaygroundUser> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    return this.http.put(`http://localhost:4200/api/users/${id}`, data, options)
-                .map(this.extractPlaygroundUser)
-                .catch(this.handleErrorObservable);
+    return this.http.put(`http://localhost:5000/api/users/${id}`, data, options)
+        .map(this.extractPlaygroundUser)
+        .catch(this.handleErrorObservable);
   }
 
   private extractPlaygroundUsers(res: any) {
     console.log(res);
     return res.users.map(item => {
       return new PlaygroundUser(
-        item.id,
-        item.userName,
-        item.phone,
-        item.currentPlan,
-        item.personalInfo,
-        // item.name,
-        // item.phone_number,
-        // item.country_code,
-        // item.email,
+          item.id,
+          item.name,
+          item.phone_number,
+          item.country_code,
+          item.email,
       );
     });
   }
@@ -63,15 +59,11 @@ export class PlaygroundUserService extends PlaygroundUserData {
   private extractPlaygroundUser(res: any): PlaygroundUser {
     const item = res.user;
     return new PlaygroundUser(
-      item.id,
-      item.userName,
-      item.phone,
-      item.currentPlan,
-      item.personalInfo,
-      // item.name,
-      // item.phone_number,
-      // item.country_code,
-      // item.email,
+        item.id,
+        item.name,
+        item.phone_number,
+        item.country_code,
+        item.email,
     );
   }
 
