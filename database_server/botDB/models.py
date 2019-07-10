@@ -17,7 +17,7 @@ class Plan(Table):
     __tablename__ = 'plans'
 
     id = db.Column(db.Integer, primary_key=True)
-    weeklyBedtime = db.Column(db.String(64))
+    weeklyBedtime = db.Column(db.String(16))
     weeklyFrequency = db.Column(db.String(4))
     __mapper_args__ = {'concrete': True}
 
@@ -45,14 +45,16 @@ class User(Table):
 
     id = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(64))
-    phone = db.Column(db.String(64), unique=True, index=True)
-    timezone = db.Column(db.String(32))
-    idealBedtime = db.Column(db.String(64))
-    currentBedtime = db.Column(db.String(64))
-    currentState = db.Column(db.String(64))
+    phone = db.Column(db.String(32), unique=True, index=True)
+    timezone = db.Column(db.String(16))
+    idealBedtime = db.Column(db.String(32))
+    currentBedtime = db.Column(db.String(32))
+    currentState = db.Column(db.String(32))
     weeklyPlanId = db.Column(db.Integer, db.ForeignKey('plans.id'))
     weeklyHit = db.Column(db.Integer)
     weeklyMiss = db.Column(db.Integer)
+    userChoiceA = db.Column(db.String(32))
+    userChoiceB = db.Column(db.String(32))
     __mapper_args__ = {'concrete': True}
 
     def __repr__(self):
@@ -76,6 +78,6 @@ class Admin(Table):
     __tablename__ = 'admin'
 
     id = db.Column(db.Integer, primary_key=True)
-    adminName = db.Column(db.String(64))
-    password = db.Column(db.String(64))
+    adminName = db.Column(db.String(32))
+    password = db.Column(db.String(32))
     __mapper_args__ = {'concrete': True}

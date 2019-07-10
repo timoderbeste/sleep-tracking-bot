@@ -48,7 +48,7 @@ export class NgxLoginComponent extends NbLoginComponent {
     }
 
     getPublicKey() {
-        this.httpClient.get('http://127.0.0.1:5000/auth/login').subscribe((data: {public_key: string}) => {
+        this.httpClient.get('http://127.0.0.1:5000/api/auth/login').subscribe((data: {public_key: string}) => {
             this.publicKey = data.public_key;
         });
     }

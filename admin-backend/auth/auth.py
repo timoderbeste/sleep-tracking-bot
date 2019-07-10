@@ -9,11 +9,6 @@ auth = Blueprint('auth', __name__,
 CORS(auth)
 
 
-@auth.route('/')
-def hello_world():
-    return 'EMILE ROOT PAGE'
-
-
 """
     Login Authentication Interface
     'GET': get public key

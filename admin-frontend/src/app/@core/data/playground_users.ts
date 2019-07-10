@@ -2,35 +2,19 @@ import { Observable } from 'rxjs';
 
 export class PlaygroundUser {
   id: number;
-  userName: string;
-  phone: string;
-  currentPlan: string;
-  personalInfo: string;
-  // name: string;
-  // phone_number: string;
-  // country_code: string;
-  // email: string;
+  name: string;
+  phone_number: string;
+  country_code: string;
+  email: string;
 
   constructor(
-    id: number,
-    userName: string,
-    phone: string,
-    currentPlan: string,
-    personalInfo: string,
-    // name: string,
-    // phone_number: string,
-    // country_code: string,
-    // email: string
-  ) {
+      id: number, name: string,
+      phone_number: string, country_code: string, email: string) {
     this.id = id;
-    this.userName = userName;
-    this.phone = phone;
-    this.currentPlan = currentPlan;
-    this.personalInfo = personalInfo;
-    // this.name = name;
-    // this.phone_number = phone_number;
-    // this.country_code = country_code;
-    // this.email = email;
+    this.name = name;
+    this.phone_number = phone_number;
+    this.country_code = country_code;
+    this.email = email;
   }
 }
 

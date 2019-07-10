@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Timo",
+      "phone_number": "9172148443",
+      "country_code": "1",
+      "email": "ningwang2023@u.northwestern.edu"
+    },
+    {
+      "id": 2,
+      "name": "Jiawei",
+      "phone_number": "7732904985",
+      "country_code": "1",
+      "email": "jiaweidai2020@u.northwestern.edu"
+    },
+    {
+      "id": 3,
+      "name": "jingya",
+      "phone_number": "6192281477",
+      "country_code": "1",
+      "email": "jingyaxun2020@u.northwestern.edu"
+    }
+  ]
+}
