@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request, jsonify, Blueprint, abort
+from flask import request, jsonify, Blueprint, abort, current_app
 from flask_cors import CORS
 
 user = Blueprint('user', __name__,
@@ -10,7 +10,7 @@ CORS(user)
 
 @user.route('/', methods=['GET'])
 def get_users():
-    with open('mock_database.json', 'r') as f:
+    with current_app.open_resource('static/mock_database.json', 'r') as f:
         data = json.load(f)
         return jsonify({'users': data['users']})
 
@@ -20,7 +20,7 @@ def create_user():
     if not request.json or not 'name' in request.json:
         abort(400)
 
-    with open('mock_database.json', 'r') as f:
+    with current_app.open_resource('static/mock_database.json', 'r') as f:
         data = json.load(f)
         users = data['users']
 
@@ -33,7 +33,7 @@ def create_user():
     }
     users.append(user)
 
-    with open('mock_database.json', 'w') as f:
+    with current_app.open_resource('../static/mock_database.json', 'w') as f:
         data['users'] = users
         json.dump(data, f)
 
@@ -45,7 +45,7 @@ def update_user(user_id: int):
     if not request.json:
         abort(400)
 
-    with open('mock_database.json', 'r') as f:
+    with current_app.open_resource('../static/mock_database.json', 'r') as f:
         data = json.load(f)
         users = data['users']
 
@@ -60,7 +60,7 @@ def update_user(user_id: int):
             if request.json['email']:
                 user['email'] = request.json['email']
 
-            with open('mock_database.json', 'w') as f:
+            with current_app.open_resource('../static/mock_database.json', 'w') as f:
                 data['users'] = users
                 json.dump(data, f)
 
@@ -70,7 +70,7 @@ def update_user(user_id: int):
 
 @user.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id: int):
-    with open('mock_database.json', 'r') as f:
+    with current_app.open_resource('../static/mock_database.json', 'r') as f:
         data = json.load(f)
         users = data['users']
 
@@ -79,8 +79,9 @@ def delete_user(user_id: int):
         abort(404)
 
     users.remove(user[0])
-    with open('mock_database.json', 'w') as f:
+    with current_app.open_resource('../static/mock_database.json', 'w') as f:
         data['users'] = users
         json.dump(data, f)
 
     return jsonify({'user': user[0]}), 201
+
