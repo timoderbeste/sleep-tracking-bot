@@ -95,7 +95,7 @@ def update_changeplan(user_id: int):
     db.session.add(updatePlan)
     db.session.commit()
     
-    targetUser = Plan.query.get_or_404(user_id)
+    targetUser = User.query.get_or_404(user_id)
     targetUser.weeklyPlanId = updatePlan.id
     db.session.add(targetUser)
     db.session.commit()
