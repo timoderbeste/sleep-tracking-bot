@@ -16,7 +16,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
 
   getUsers(): Observable<PlaygroundUser[]> {
     return this.http
-        .get('http://localhost:5000/api/users')
+        .get('http://localhost:5000/api/users/')
         .map(this.extractPlaygroundUsers)
         .catch(this.handleErrorObservable);
   }
@@ -24,7 +24,7 @@ export class PlaygroundUserService extends PlaygroundUserData {
   createUser(data: Object): Observable<PlaygroundUser> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    return this.http.post('http://localhost:5000/api/users', data, options)
+    return this.http.post('http://localhost:5000/api/users/', data, options)
         .map(this.extractPlaygroundUser)
         .catch(this.handleErrorObservable);
   }
@@ -48,10 +48,8 @@ export class PlaygroundUserService extends PlaygroundUserData {
     return res.users.map(item => {
       return new PlaygroundUser(
           item.id,
-          item.name,
-          item.phone_number,
-          item.country_code,
-          item.email,
+          item.userName,
+          item.phone,
       );
     });
   }
@@ -60,10 +58,8 @@ export class PlaygroundUserService extends PlaygroundUserData {
     const item = res.user;
     return new PlaygroundUser(
         item.id,
-        item.name,
-        item.phone_number,
-        item.country_code,
-        item.email,
+        item.userName,
+        item.phone,
     );
   }
 
