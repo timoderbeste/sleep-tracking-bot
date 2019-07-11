@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { NgxAuthRoutingModule } from './auth-routing.module';
-import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
 import { NgxLoginComponent } from './login/login.component'; // <---
 import {
     NbAlertModule,
