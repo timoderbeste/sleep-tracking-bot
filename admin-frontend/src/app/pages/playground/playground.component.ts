@@ -16,18 +16,13 @@ export class PlaygroundComponent implements OnInit {
     columns: {
       id: {
         title: 'ID',
+        isEditable: false,
       },
-      name: {
+      userName: {
         title: 'Full Name',
       },
-      phoneNumber: {
+      phone: {
         title: 'Phone Number',
-      },
-      countryCode: {
-        title: 'Country Code',
-      },
-      email: {
-        title: 'Email',
       },
     },
     add: {
@@ -62,10 +57,8 @@ export class PlaygroundComponent implements OnInit {
           const jsonifiedUsers = users.map(item => {
             return {
               'id': item.id,
-              'name': item.name,
-              'phoneNumber': item.phone_number,
-              'countryCode': item.country_code,
-              'email': item.email,
+              'userName': item.userName,
+              'phone': item.phone,
             };
           });
           this.userSource = new LocalDataSource(jsonifiedUsers);

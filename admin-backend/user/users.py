@@ -1,4 +1,5 @@
 import json
+import requests
 
 from flask import request, jsonify, Blueprint, abort, current_app
 from flask_cors import CORS
@@ -7,37 +8,44 @@ user = Blueprint('user', __name__,
                  template_folder='templates')
 CORS(user)
 
+database_api_base_url = 'http://127.0.0.1:5001'
+
 
 @user.route('/', methods=['GET'])
 def get_users():
-    with current_app.open_resource('static/mock_database.json', 'r') as f:
-        data = json.load(f)
-        return jsonify({'users': data['users']})
+    res = requests.get('%s/users' % database_api_base_url)
+    return jsonify({'users': res.json()['users']})
 
 
 @user.route('/', methods=['POST'])
 def create_user():
-    if not request.json or not 'name' in request.json:
+    if not request.json or not 'userName' in request.json:
         abort(400)
 
-    with current_app.open_resource('static/mock_database.json', 'r') as f:
-        data = json.load(f)
-        users = data['users']
-
-    user = {
-        'id': users[-1]['id'] + 1 if len(users) != 0 else 1,
-        'name': request.json['name'],
-        'phone_number': request.json['phoneNumber'],
-        'country_code': request.json['countryCode'],
-        'email': request.json['email']
+    new_user = {
+        'userName': request.json['userName'],
+        'phone': request.json['phone'],
+        'timezone': '',
+        'idealBedtime': '',
+        'currentBedtime': '',
+        'currentState': '',
+        'weeklyHit': '0',
+        'weeklyMiss': '0',
+        'weeklyPlanId': '-1',
+        'userChoiceA': '',
+        'userChoiceB': '',
     }
-    users.append(user)
 
-    with current_app.open_resource('static/mock_database.json', 'w') as f:
-        data['users'] = users
-        json.dump(data, f)
+    headers = {
+        'Content-type': 'application/json'
+    }
 
-    return jsonify({'user': user}), 201
+    res = requests.post('%s/user' % database_api_base_url, headers=headers, data=json.dumps(new_user))
+
+    if res.status_code == 201:
+        return jsonify({'user': new_user}), 201
+    else:
+        abort(400)
 
 
 @user.route('/<int:user_id>', methods=['PUT'])
@@ -45,43 +53,45 @@ def update_user(user_id: int):
     if not request.json:
         abort(400)
 
-    with current_app.open_resource('static/mock_database.json', 'r') as f:
-        data = json.load(f)
-        users = data['users']
+    users = requests.get('%s/users' % database_api_base_url).json()['users']
 
     for user in users:
         if user['id'] == user_id:
-            if request.json['name']:
-                user['name'] = request.json['name']
-            if request.json['phoneNumber']:
-                user['phone_number'] = request.json['phoneNumber']
-            if request.json['countryCode']:
-                user['country_code'] = request.json['countryCode']
-            if request.json['email']:
-                user['email'] = request.json['email']
+            print(user)
+            updated_user = {
+                'timezone': '',
+                'idealBedtime': '',
+                'currentBedtime': '',
+                'currentState': '',
+                'weeklyHit': '0',
+                'weeklyMiss': '0',
+                'weeklyPlanId': '-1',
+                'userChoiceA': '',
+                'userChoiceB': '',
+                'userName': user['userName'],
+                'phone': user['phone'],
+            }
+            if request.json['userName']:
+                updated_user['userName'] = request.json['userName']
+            if request.json['phone']:
+                updated_user['phone'] = request.json['phone']
 
-            with current_app.open_resource('static/mock_database.json', 'w') as f:
-                data['users'] = users
-                json.dump(data, f)
+            headers = {
+                'Content-type': 'application/json'
+            }
+            requests.put('%s/user/%d' % (database_api_base_url, user_id), headers=headers, data=json.dumps(updated_user))
 
-            return jsonify({'user': user}), 201
+            return jsonify({'user': updated_user}), 201
     abort(404)
 
 
 @user.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id: int):
-    with current_app.open_resource('static/mock_database.json', 'r') as f:
-        data = json.load(f)
-        users = data['users']
+    res = requests.delete('%s/user/%d' % (database_api_base_url, user_id))
 
-    user = [user for user in users if user['id'] == user_id]
-    if len(user) == 0:
-        abort(404)
+    if res.status_code == 201:
+        deleted_user = res.json()
+        return jsonify({'user': deleted_user}), 201
+    abort(404)
 
-    users.remove(user[0])
-    with current_app.open_resource('static/mock_database.json', 'w') as f:
-        data['users'] = users
-        json.dump(data, f)
-
-    return jsonify({'user': user[0]}), 201
 
