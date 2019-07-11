@@ -64,14 +64,14 @@ export class NgxLoginComponent extends NbLoginComponent {
 
         this.service.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {
             this.submitted = false;
-            console.log(result);
-            if (result.isSuccess()) {
-                this.messages = result.getMessages();
+            const responseBody = result.getResponse()['body'];
+            if (responseBody['login_status'] === 'success') {
+                this.messages = responseBody['messages'];
             } else {
-                this.errors = result.getErrors();
+                this.errors = responseBody['errors'];
             }
 
-            const redirect = result.getRedirect();
+            const redirect = responseBody['redirect'];
             if (redirect) {
                 setTimeout(() => {
                     return this.router.navigateByUrl(redirect);

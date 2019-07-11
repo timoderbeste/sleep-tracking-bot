@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { NgxAuthRoutingModule } from './auth-routing.module';
-import {NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
+import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
 import { NgxLoginComponent } from './login/login.component'; // <---
 import {
     NbAlertModule,
@@ -29,7 +29,7 @@ import {
             strategies: [
                 NbPasswordAuthStrategy.setup({
                     name: 'account',
-                    baseEndpoint: 'http://127.0.0.1:5000/auth',
+                    baseEndpoint: 'http://127.0.0.1:5000/api/auth',
                     login: {
                         endpoint: '/login',
                         method: 'post',
