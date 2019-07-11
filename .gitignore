@@ -11,3 +11,4 @@
 **/database_server/migrations
 **/node_modules
 **/dev.sqlite
+**/package-lock.json
