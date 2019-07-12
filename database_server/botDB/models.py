@@ -19,6 +19,7 @@ class Plan(Table):
     id = db.Column(db.Integer, primary_key=True)
     weeklyBedtime = db.Column(db.String(16))
     weeklyFrequency = db.Column(db.String(4))
+    users = db.relationship('User', backref = 'plan')
     __mapper_args__ = {'concrete': True}
 
     def __repr__(self):
@@ -55,6 +56,8 @@ class User(Table):
     weeklyMiss = db.Column(db.Integer)
     userChoiceA = db.Column(db.String(32))
     userChoiceB = db.Column(db.String(32))
+    records = db.relationship('Record', backref='user')
+    data = db.relationship('Datum', backref='user')
     __mapper_args__ = {'concrete': True}
 
     def __repr__(self):

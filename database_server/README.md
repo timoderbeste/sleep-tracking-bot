@@ -84,6 +84,7 @@ To run the sever locally follow these steps:
 		- http://localhost:port/record/[idnum]: Delete record by ID
 	- Update (request method: PUT)
 		- http://localhost:port/record/[idnum]: Update record by ID
+		- http://localhost:port/record/[idnum]/update: 
 	
 3. For Plan Table:
 	
@@ -99,25 +100,30 @@ To run the sever locally follow these steps:
 	
 4. For Datum Table:
 
-  - Search (request method: GET)
-  	- http://localhost:port/data: return all raw data
-  	- http://localhost:port/datum/id/[idnum]: return datum by id
-  - Create (request method: POST)
-  	- http://localhost:port/datum:  request body's example is in example folder 
-  - Delete (request method: DELETE)
-  	- http://localhost:port/datum/[idnum]: Delete datum by ID
-  - Update (request method: PUT)
-  	- http://localhost:port/datum/[idnum]: Update datum by ID
+   - Search (request method: GET)
+     - http://localhost:port/data: return all raw data
+     - http://localhost:port/datum/id/[idnum]: return datum by id
+
+   - Create (request method: POST)
+     - http://localhost:port/datum:  request body's example is in example folder 
+
+   - Delete (request method: DELETE)
+     - http://localhost:port/datum/[idnum]: Delete datum by ID
+
+   - Update (request method: PUT)
+     - http://localhost:port/datum/[idnum]: Update datum by ID
 
 5. For Admin Table:
 
-- get (request method: GET)
-- http://localhost:port/admin/get: return admin name and password
-- Create (request method: POST)
-- http://localhost:port/admin/create:  request body's example is in example folder 
-- Update (request method: PUT)
-- http://localhost:port/admin/update: 
+   - Get (request method: GET)
+     - http://localhost:port/admin/get: return admin name and password
 
+   - Create (request method: POST)
+     - http://localhost:port/admin/create:  request body's example is in example folder 
 
-  	
-  	  
+   - Update (request method: PUT)
+     - http://localhost:port/admin/update
+
+6. For Analysis:
+   - Get Top 3 reason (request method: GET) 
+     - http://localhost:port/user/id/[idnum]/reason

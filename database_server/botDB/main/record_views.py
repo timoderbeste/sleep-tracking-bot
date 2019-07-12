@@ -1,6 +1,6 @@
 from flask import request, session, redirect, url_for, current_app, jsonify, abort
 from .. import db
-from ..models import Datum, User, Record
+from ..models import Datum, User, Record, Plan
 from . import main
 
 
@@ -25,7 +25,7 @@ def create_record():
     if not request.json:
         abort(400)
 
-    newRecord = Record(weeklPlanId = int(request.json['weeklPlanId']), userId = int(request.json['userId']), reason = request.json['reason'],
+    newRecord = Record(weeklyPlanId = int(request.json['weeklyPlanId']), userId = int(request.json['userId']), reason = request.json['reason'],
      isSlept = bool(request.json['isSlept']), date = request.json['date']) # example: '2018-02-03'
 
     db.session.add(newRecord)
@@ -39,7 +39,7 @@ def update_record(record_id: int):
         abort(400)
 
     targetRecord = Record.query.get_or_404(record_id)
-    targetRecord.weeklPlanId = int(request.json['weeklPlanId'])
+    targetRecord.weeklyPlanId = int(request.json['weeklyPlanId'])
     targetRecord.userId = int(request.json['userId'])
     targetRecord.reason = request.json['reason']
     targetRecord.isSlept = bool(request.json['isSlept'])
@@ -58,3 +58,25 @@ def delete_record(record_id: int):
     db.session.commit()
 
     return jsonify({'record': targetDict}), 201
+
+
+@main.route('/record/<int:record_id>/update', methods=['PUT'])
+def update_record_info(record_id: int):
+    if not request.json:
+        abort(400)
+
+    targetRecord = Record.query.get_or_404(record_id)
+    updateDict = dict(request.json)
+    if 'weeklyPlanId' in updateDict:
+        targetRecord.weeklyPlanId = updateDict['weeklyPlanId']
+    if  'userId'in updateDict:
+        targetRecord.userId = updateDict['userId']
+    if  'date'in updateDict:
+        targetRecord.date = updateDict['date']
+    if  'isSlept'in updateDict:
+        targetRecord.isSlept = bool(updateDict['isSlept'])
+    if  'reason'in updateDict:
+        targetRecord.reason = updateDict['reason']
+    db.session.add(targetRecord)
+    db.session.commit()
+    return jsonify({'record': targetRecord.to_dict()}), 201
