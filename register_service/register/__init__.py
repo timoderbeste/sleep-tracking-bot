@@ -13,7 +13,7 @@ bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 DB_URL = 'http://127.0.0.1:5000/'
-SMS_URL = 'http://69f52c2b.ngrok.io/'
+SMS_URL = 'http://127.0.0.1:2000/'
 
 class RegisterForm(FlaskForm):
     userName = StringField('Please enter your username', validators=[DataRequired()])
