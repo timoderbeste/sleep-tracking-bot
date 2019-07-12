@@ -1,0 +1,6 @@
+# Flask
+Flask
+flask_bootstrap
+flask_moment
+flask_wtf
+flask_script
