@@ -41,6 +41,19 @@ def create_user():
     db.session.commit()
     return jsonify({'user': newUser.to_dict()}), 201
 
+@main.route('/user/create', methods=['POST'])
+def create_newuser():
+    if not request.json:
+        abort(400)
+
+    newUser = User(userName = request.json['userName'], phone = request.json['phone'])
+
+    db.session.add(newUser)
+    db.session.commit()
+    return jsonify({'user': newUser.to_dict()}), 201
+
+
+
 
 @main.route('/user/<int:user_id>', methods=['PUT'])
 def update_user(user_id: int):
