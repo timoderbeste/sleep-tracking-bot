@@ -29,5 +29,5 @@ To run the sever locally follow these steps:
 1. Start the register server.
 
     ``
-    python3 register.py 
+    python3 manage.py runserver -p [portnum] 
     ``
