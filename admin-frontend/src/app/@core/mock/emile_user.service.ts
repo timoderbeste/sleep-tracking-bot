@@ -4,49 +4,49 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { PlaygroundUser, PlaygroundUserData } from '../data/playground_users';
+import { EmileUser, EmileUserData } from '../data/emile_users';
 
 
 @Injectable()
-export class PlaygroundUserService extends PlaygroundUserData {
+export class EmileUserService extends EmileUserData {
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  getUsers(): Observable<PlaygroundUser[]> {
+  getUsers(): Observable<EmileUser[]> {
     return this.http
-        .get('http://localhost:5000/api/users/')
-        .map(this.extractPlaygroundUsers)
+        .get('http://localhost:5001/api/users/')
+        .map(this.extractEmileUsers)
         .catch(this.handleErrorObservable);
   }
 
-  createUser(data: Object): Observable<PlaygroundUser> {
+  createUser(data: Object): Observable<EmileUser> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    return this.http.post('http://localhost:5000/api/users/', data, options)
-        .map(this.extractPlaygroundUser)
+    return this.http.post('http://localhost:5001/api/users/', data, options)
+        .map(this.extractEmileUser)
         .catch(this.handleErrorObservable);
   }
 
-  deleteUser(id: number): Observable<PlaygroundUser> {
-    return this.http.delete(`http://localhost:5000/api/users/${id}`)
-        .map(this.extractPlaygroundUser)
+  deleteUser(id: number): Observable<EmileUser> {
+    return this.http.delete(`http://localhost:5001/api/users/${id}`)
+        .map(this.extractEmileUser)
         .catch(this.handleErrorObservable);
   }
 
-  updateUser(id: number, data: Object): Observable<PlaygroundUser> {
+  updateUser(id: number, data: Object): Observable<EmileUser> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    return this.http.put(`http://localhost:5000/api/users/${id}`, data, options)
-        .map(this.extractPlaygroundUser)
+    return this.http.put(`http://localhost:5001/api/users/${id}`, data, options)
+        .map(this.extractEmileUser)
         .catch(this.handleErrorObservable);
   }
 
-  private extractPlaygroundUsers(res: any) {
+  private extractEmileUsers(res: any) {
     console.log(res);
     return res.users.map(item => {
-      return new PlaygroundUser(
+      return new EmileUser(
           item.id,
           item.userName,
           item.phone,
@@ -54,9 +54,9 @@ export class PlaygroundUserService extends PlaygroundUserData {
     });
   }
 
-  private extractPlaygroundUser(res: any): PlaygroundUser {
+  private extractEmileUser(res: any): EmileUser {
     const item = res.user;
-    return new PlaygroundUser(
+    return new EmileUser(
         item.id,
         item.userName,
         item.phone,

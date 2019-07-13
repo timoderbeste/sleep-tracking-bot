@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
-import { PlaygroundUser, PlaygroundUserData } from '../../@core/data/playground_users';
+import { EmileUser, EmileUserData } from '../../../@core/data/emile_users';
 
 
 @Component({
-  selector: 'ngx-playground',
-  templateUrl: './playground.component.html',
+  selector: 'ngx-emile-user-table',
+  templateUrl: './emile-user-table.component.html',
 })
-export class PlaygroundComponent implements OnInit {
+export class EmileUserTableComponent implements OnInit {
 
   userSource: LocalDataSource;
 
@@ -44,15 +44,15 @@ export class PlaygroundComponent implements OnInit {
     mode: 'inline',
   };
 
-  constructor(private playgroundUserService: PlaygroundUserData) { }
+  constructor(private emileUserService: EmileUserData) { }
 
   ngOnInit() {
     this.getUsers();
   }
 
   getUsers() {
-    this.playgroundUserService.getUsers()
-        .subscribe((users: [PlaygroundUser]) => {
+    this.emileUserService.getUsers()
+        .subscribe((users: [EmileUser]) => {
           console.log('users:', users);
           const jsonifiedUsers = users.map(item => {
             return {
@@ -68,8 +68,8 @@ export class PlaygroundComponent implements OnInit {
   createUser(event) {
     console.log(event);
     if (window.confirm('Are you sure you want to create?')) {
-      this.playgroundUserService.createUser(event.newData)
-          .subscribe((user: PlaygroundUser) => {
+      this.emileUserService.createUser(event.newData)
+          .subscribe((user: EmileUser) => {
             console.log(user);
             this.getUsers();
             event.confirm.resolve();
@@ -82,8 +82,8 @@ export class PlaygroundComponent implements OnInit {
   deleteUser(event) {
     console.log(event);
     if (window.confirm('Are you sure you want to delete?')) {
-      this.playgroundUserService.deleteUser(event.data.id)
-          .subscribe((user: PlaygroundUser) => {
+      this.emileUserService.deleteUser(event.data.id)
+          .subscribe((user: EmileUser) => {
             console.log('user deleted:', user);
             this.getUsers();
             event.confirm.resolve();
@@ -96,8 +96,8 @@ export class PlaygroundComponent implements OnInit {
   editUser(event) {
     console.log('editUser event', event);
     if (window.confirm('Are you sure you want to update?')) {
-      this.playgroundUserService.updateUser(event.newData.id, event.newData)
-          .subscribe((user: PlaygroundUser) => {
+      this.emileUserService.updateUser(event.newData.id, event.newData)
+          .subscribe((user: EmileUser) => {
             console.log('user updated:', user);
             this.getUsers();
             event.confirm.resolve();
@@ -106,4 +106,5 @@ export class PlaygroundComponent implements OnInit {
       event.confirm.reject();
     }
   }
+
 }

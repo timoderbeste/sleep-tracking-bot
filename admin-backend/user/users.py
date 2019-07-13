@@ -8,7 +8,7 @@ user = Blueprint('user', __name__,
                  template_folder='templates')
 CORS(user)
 
-database_api_base_url = 'http://127.0.0.1:5001'
+database_api_base_url = 'http://127.0.0.1:5000'
 
 
 @user.route('/', methods=['GET'])
