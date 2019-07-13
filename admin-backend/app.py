@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import Flask
 from flask_cors import CORS
 
@@ -11,4 +12,4 @@ app.register_blueprint(users.user, url_prefix='/api/users')
 CORS(app)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)

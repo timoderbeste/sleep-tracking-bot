@@ -13,9 +13,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/iot-dashboard',
   },
   {
-    title: 'Playground',
+    title: 'Emile',
     icon: 'nb-play',
-    link: '/pages/playground',
+    link: '/pages/emile',
   },
   // {
   //   title: 'FEATURES',
