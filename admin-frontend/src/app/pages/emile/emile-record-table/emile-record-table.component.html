@@ -1,0 +1,8 @@
+<h1>Record table</h1>
+<ng2-smart-table
+[settings]="smartTableSettings"
+[source]="recordSource"
+(createConfirm)="createRecord($event)"
+(deleteConfirm)="deleteRecord($event)"
+(editConfirm)="editRecord($event)"
+></ng2-smart-table>

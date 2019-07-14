@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
-import { EmileUser, EmileUserData } from '../../../@core/data/emile_users';
+import { EmileUser, EmileUserData } from '../../../@core/data/emile-user';
 
 
 @Component({
@@ -23,6 +23,24 @@ export class EmileUserTableComponent implements OnInit {
       },
       phone: {
         title: 'Phone Number',
+      },
+      timezone: {
+        title: 'Time Zone',
+      },
+      idealBedtime: {
+        title: 'Ideal Bedtime',
+      },
+      currentBedtime: {
+        title: 'Current Bedtime',
+      },
+      weeklyPlanId: {
+        title: 'Weekly Plan Id',
+      },
+      weeklyHit: {
+        title: 'Weekly Hit',
+      },
+      weeklyMiss: {
+        title: 'Weekly Miss',
       },
     },
     add: {
@@ -51,7 +69,7 @@ export class EmileUserTableComponent implements OnInit {
   }
 
   getUsers() {
-    this.emileUserService.getUsers()
+    this.emileUserService.getAll()
         .subscribe((users: [EmileUser]) => {
           console.log('users:', users);
           const jsonifiedUsers = users.map(item => {
@@ -59,6 +77,13 @@ export class EmileUserTableComponent implements OnInit {
               'id': item.id,
               'userName': item.userName,
               'phone': item.phone,
+              'timezone': item.timezone,
+              'idealBedtime': item.idealBedtime,
+              'currentBedtime': item.currentBedtime,
+              'currentState': item.currentState,
+              'weeklyPlanId': item.weeklyPlanId,
+              'weeklyHit': item.weeklyHit,
+              'weeklyMiss': item.weeklyMiss,
             };
           });
           this.userSource = new LocalDataSource(jsonifiedUsers);
@@ -68,7 +93,7 @@ export class EmileUserTableComponent implements OnInit {
   createUser(event) {
     console.log(event);
     if (window.confirm('Are you sure you want to create?')) {
-      this.emileUserService.createUser(event.newData)
+      this.emileUserService.createOne(event.newData)
           .subscribe((user: EmileUser) => {
             console.log(user);
             this.getUsers();
@@ -82,7 +107,7 @@ export class EmileUserTableComponent implements OnInit {
   deleteUser(event) {
     console.log(event);
     if (window.confirm('Are you sure you want to delete?')) {
-      this.emileUserService.deleteUser(event.data.id)
+      this.emileUserService.deleteOne(event.data.id)
           .subscribe((user: EmileUser) => {
             console.log('user deleted:', user);
             this.getUsers();
@@ -96,7 +121,7 @@ export class EmileUserTableComponent implements OnInit {
   editUser(event) {
     console.log('editUser event', event);
     if (window.confirm('Are you sure you want to update?')) {
-      this.emileUserService.updateUser(event.newData.id, event.newData)
+      this.emileUserService.updateOne(event.newData.id, event.newData)
           .subscribe((user: EmileUser) => {
             console.log('user updated:', user);
             this.getUsers();

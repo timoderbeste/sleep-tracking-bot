@@ -1,0 +1,8 @@
+<h1>Plan table</h1>
+<ng2-smart-table
+[settings]="smartTableSettings"
+[source]="planSource"
+(createConfirm)="createPlan($event)"
+(deleteConfirm)="deletePlan($event)"
+(editConfirm)="editPlan($event)"
+></ng2-smart-table>

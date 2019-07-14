@@ -30,7 +30,9 @@ import { CountryOrderData } from './data/country-order';
 import { StatsProgressBarData } from './data/stats-progress-bar';
 import { VisitorsAnalyticsData } from './data/visitors-analytics';
 import { SecurityCamerasData } from './data/security-cameras';
-import { EmileUserData } from './data/emile_users';
+import { EmileUserData } from './data/emile-user';
+import { EmileRecordData } from './data/emile-record';
+import { EmilePlanData } from './data/emile-plan';
 
 import { UserService } from './mock/users.service';
 import { ElectricityService } from './mock/electricity.service';
@@ -52,7 +54,9 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
-import { EmileUserService } from './mock/emile_user.service';
+import { EmileUserService } from './mock/emile-user.service';
+import { EmileRecordService } from './mock/emile-record.service';
+import { EmilePlanService } from './mock/emile-plan.service';
 
 const socialLinks = [
   {
@@ -93,6 +97,8 @@ const DATA_SERVICES = [
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
   { provide: EmileUserData, useClass: EmileUserService },
+  { provide: EmileRecordData, useClass: EmileRecordService },
+  { provide: EmilePlanData, useClass: EmilePlanService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
