@@ -38,6 +38,7 @@ def notify_sms(phone):
 def index():
     form = RegisterForm()
     if form.validate_on_submit():
+        session.permanent = True
         session['userName'] = form.userName.data
         session['phone'] = form.phone.data
         add_user(form.userName.data, form.phone.data)
