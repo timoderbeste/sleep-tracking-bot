@@ -26,6 +26,31 @@ export class EmileUserTableComponent implements OnInit {
       },
       timezone: {
         title: 'Time Zone',
+        // type: 'html',
+        editor: {
+          type: 'list',
+          config: {
+            // TODO: This list can be moved to some static files.
+            list: [
+              {
+                value: 'GMT-7',
+                title: 'GMT-7',
+              },
+              {
+                value: 'GMT-5',
+                title: 'GMT-5',
+              },
+              {
+                value: 'GMT-4',
+                title: 'GMT-4',
+              },
+              {
+                value: 'GMT+8',
+                title: 'GMT+8',
+              },
+            ],
+          },
+        },
       },
       idealBedtime: {
         title: 'Ideal Bedtime',
