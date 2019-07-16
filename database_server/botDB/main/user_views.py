@@ -46,7 +46,7 @@ def create_newuser():
     if not request.json:
         abort(400)
 
-    newUser = User(userName = request.json['userName'], phone = request.json['phone'])
+    newUser = User(userName = request.json['userName'], phone = request.json['phone'], weeklyMiss = 0, weeklyHit = 0, weeklyPlanId = 0)
 
     db.session.add(newUser)
     db.session.commit()
