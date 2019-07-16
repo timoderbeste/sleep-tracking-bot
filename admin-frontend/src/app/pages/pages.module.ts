@@ -1,30 +1,26 @@
 import { NgModule } from '@angular/core';
+import { NbMenuModule } from '@nebular/theme';
 
+import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
+import { EmileModule } from './emile/emile.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
-import { EmileModule } from './emile/emile.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { ReusableViewsModule } from './reusable-views/reusable-views.module';
-
-const PAGES_COMPONENTS = [
-  PagesComponent,
-];
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
+    NbMenuModule,
     DashboardModule,
     ECommerceModule,
     EmileModule,
     MiscellaneousModule,
-    ReusableViewsModule,
   ],
   declarations: [
-    ...PAGES_COMPONENTS,
+    PagesComponent,
   ],
 })
 export class PagesModule {

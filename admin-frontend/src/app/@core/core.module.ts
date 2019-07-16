@@ -34,6 +34,7 @@ import { EmileUserData } from './data/emile-user';
 import { EmileRecordData } from './data/emile-record';
 import { EmilePlanData } from './data/emile-plan';
 
+
 import { UserService } from './mock/users.service';
 import { ElectricityService } from './mock/electricity.service';
 import { SmartTableService } from './mock/smart-table.service';
@@ -62,17 +63,17 @@ const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
     target: '_blank',
-    icon: 'socicon-github',
+    icon: 'github',
   },
   {
     url: 'https://www.facebook.com/akveo/',
     target: '_blank',
-    icon: 'socicon-facebook',
+    icon: 'facebook',
   },
   {
     url: 'https://twitter.com/akveo_inc',
     target: '_blank',
-    icon: 'socicon-twitter',
+    icon: 'twitter',
   },
 ];
 
