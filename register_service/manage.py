@@ -5,7 +5,7 @@ from register import app
 
 
 
-
+WTF_CSRF_ENABLED=False
 app.permanent_session_lifetime = datetime.timedelta(seconds=8)
 manager = Manager(app)
 
