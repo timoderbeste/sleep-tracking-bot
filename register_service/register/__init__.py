@@ -27,7 +27,7 @@ SMS_URL = 'http://b50d6d9f.ngrok.io/'
 
 
 
-class RegisterForm(FlaskForm):
+class RegisterForm(FlaskForm, csrf_enabled=False):
     userName = StringField('Please enter your username', validators=[DataRequired()])
     phone = StringField('Please enter your phone number', validators=[DataRequired()])
     submit = SubmitField('Submit')
