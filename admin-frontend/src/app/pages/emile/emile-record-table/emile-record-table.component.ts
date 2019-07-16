@@ -3,7 +3,6 @@ import { LocalDataSource } from 'ng2-smart-table';
 
 import { EmileRecord, EmileRecordData } from '../../../@core/data/emile-record';
 
-
 @Component({
   selector: 'ngx-emile-record-table',
   templateUrl: './emile-record-table.component.html',
