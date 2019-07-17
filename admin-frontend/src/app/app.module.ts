@@ -20,6 +20,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import {AuthGuard} from './@core/mock/auth-guard.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +43,10 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+  ],
+  providers: [
+    CookieService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

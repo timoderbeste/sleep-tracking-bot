@@ -38,6 +38,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import {CookieService} from 'ngx-cookie-service';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -74,6 +75,9 @@ const PIPES = [
   imports: [CommonModule, ...NB_MODULES],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
+  providers: [
+    CookieService,
+  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
