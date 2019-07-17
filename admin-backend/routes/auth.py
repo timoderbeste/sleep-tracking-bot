@@ -96,13 +96,17 @@ def login_response(status):
     if status == 'success':
         return jsonify({
             'login_status': status,
-            'message': 'Login succeed, redirecting...',
+            'messages': [
+                'Login succeed, redirecting...',
+                ],
             'redirect': '/',
         })
     else:
         return jsonify({
             'login_status': status,
-            'errors': 'Invalid account or password',
+            'errors': [
+                'Invalid account or password',
+            ]
         })
 
 
@@ -110,7 +114,7 @@ def create_default_user():
     """
         Create default user
     """
-    api_url = database_url + 'admin/update'
+    api_url = database_url + 'admin/create'
     sha = SHA.new()
     sha.update(b'magics')
     encryptedPassword = sha.hexdigest()
@@ -118,7 +122,7 @@ def create_default_user():
         "adminName": "admin",
         "password": encryptedPassword,
     }
-    requests.put(url=api_url, json=data)
+    requests.post(url=api_url, json=data)
 
 
 # For test only
