@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import * as JsEncryptModule from 'jsencrypt';
 import {CookieService} from 'ngx-cookie-service';
-import {UserData} from "../../../@core/data/users";
+import {UserData} from '../../../@core/data/users';
 
 @Component({
   selector: 'ngx-login',
