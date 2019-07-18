@@ -66,7 +66,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.onItemClick()
       .pipe(
         map(({ item: { data } }) => {
-          return data.id;
+          if (data)
+            return data.id;
+          else
+            return -1;
         }),
       )
       .subscribe((item) => {
