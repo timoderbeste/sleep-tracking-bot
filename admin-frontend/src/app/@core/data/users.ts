@@ -18,4 +18,5 @@ export abstract class UserData {
   abstract getUsers(): Observable<User[]>;
   abstract getContacts(): Observable<Contacts[]>;
   abstract getRecentUsers(): Observable<RecentUsers[]>;
+  abstract setUser(username: string, info: Object);
 }

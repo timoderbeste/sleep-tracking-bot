@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import * as JsEncryptModule from 'jsencrypt';
 import {CookieService} from 'ngx-cookie-service';
+import {UserData} from "../../../@core/data/users";
 
 @Component({
   selector: 'ngx-login',
@@ -34,6 +35,7 @@ export class NgxLoginComponent extends NbLoginComponent {
               @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected cookie: CookieService,
               protected cd: ChangeDetectorRef,
+              private userService: UserData,
               protected router: Router,
               private httpClient: HttpClient) {
     super(service, options, cd, router);
@@ -80,12 +82,18 @@ export class NgxLoginComponent extends NbLoginComponent {
       const responseBody = result.getResponse()['body'];
       if (responseBody['login_status'] === 'success') {
         this.messages = responseBody['messages'];
+        this.userService.setUser(responseBody['username'], {
+          name: responseBody['username'],
+          picture: responseBody['picture'],
+        });
+        this.user.name = responseBody['username'];
         if (this.user.rememberMe === true) {
           this.cookie.set('isRemember', 'true');
         } else {
           this.cookie.set('isRemember', 'false');
         }
         sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('currUser', responseBody['username']);
       } else {
         this.errors = responseBody['errors'];
         this.user.password = '';

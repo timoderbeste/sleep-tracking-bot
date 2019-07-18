@@ -56,8 +56,27 @@ def login():
     if response.status_code == 200:
         admins = response.json()
         if admins['admin']['adminName'] == account and admins['admin']['password'] == sha_encrypted_password:
-            return login_response('success')
-    return login_response('fail')
+            return jsonify({
+                'login_status': 'success',
+                'username': account,
+                'picture': 'assets/images/admin.png',
+                'messages': [
+                    'Login succeed, redirecting...',
+                ],
+                'redirect': '/pages/emile',
+                'data': {
+                    'token': {
+                        'loggedIn': True,
+                    },
+                }
+            })
+
+    return jsonify({
+        'login_status': 'fail',
+        'errors': [
+            'Invalid account or password',
+        ]
+    })
 
 
 def decrypt_password(password):
@@ -83,12 +102,13 @@ def decrypt_password(password):
     return ret
 
 
-def login_response(status):
+def login_response(status, account=None):
     """
         Generate a login response in json format
 
         Parameters:
-            status (str): login status(success or fail)
+            :param status: (str) login status(success or fail)
+            :param account: (str) account used in login, also use it as username to show on head bar
 
         Returns:
             jsonified login response
@@ -96,10 +116,11 @@ def login_response(status):
     if status == 'success':
         return jsonify({
             'login_status': status,
+            'username': account,
             'messages': [
                 'Login succeed, redirecting...',
-                ],
-            'redirect': '/pages',
+            ],
+            'redirect': '/pages/emile',
             'data': {
                 'token': {
                     'loggedIn': True,

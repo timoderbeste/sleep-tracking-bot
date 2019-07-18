@@ -13,6 +13,7 @@ import {
   NbCheckboxModule,
   NbInputModule,
 } from '@nebular/theme';
+import {UserService} from '../../@core/mock/users.service';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {
   ],
   providers: [
     CookieService,
+    UserService,
   ],
 })
 export class NgxAuthModule {
